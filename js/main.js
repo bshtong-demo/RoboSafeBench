@@ -127,14 +127,15 @@
                 <video muted loop playsinline controls preload="metadata" hidden></video>
                 <div class="demo-cell-empty"><b>L${level}</b><span></span></div>
               </div>
-              <figcaption>L${level}</figcaption>
+              <figcaption><b>L${level}</b><span data-i18n="clip_${backend.id}_l${level}"></span></figcaption>
             </figure>
           `).join("")}
         </div>
       </div>
     `).join("");
     syncDemoEmpty();
-    $$(".demo-cell").forEach(mountCell);
+    $$("#demo-rows .demo-cell").forEach(mountCell);
+    bindSafety();
 
     function showBackend(id) {
       $$("#demo-bar [data-backend]").forEach((btn) => {
@@ -142,7 +143,7 @@
         btn.classList.toggle("is-on", on);
         btn.setAttribute("aria-pressed", String(on));
       });
-      $$(".demo-row").forEach((row) => {
+      $$("#demo-rows .demo-row").forEach((row) => {
         const on = row.getAttribute("data-demo-backend") === id;
         row.hidden = !on;
         if (!on) {
@@ -155,6 +156,7 @@
       btn.addEventListener("click", () => showBackend(btn.getAttribute("data-backend")));
     });
     showBackend(initial);
+    applyLang(currentLang());
 
     $$(".level-card[data-level]").forEach((card) => {
       card.style.cursor = "pointer";
@@ -166,6 +168,31 @@
         });
       });
     });
+  }
+
+  function bindSafety() {
+    const host = $("#demo-safety-clips");
+    if (!host) return;
+    const clips = Array.isArray(cfg.safetyDemos) ? cfg.safetyDemos : [];
+    if (!clips.length) {
+      const wrap = $("#demo-safety");
+      if (wrap) wrap.hidden = true;
+      return;
+    }
+    host.innerHTML = clips.map((clip) => {
+      const key = clip.key;
+      const level = clip.level != null ? clip.level : "";
+      const label = level === "" ? "" : `L${level}`;
+      return `
+            <figure class="demo-cell" data-clip="${key}" data-level="${level}">
+              <div class="demo-cell-frame is-empty">
+                <video muted loop playsinline controls preload="metadata" hidden></video>
+                <div class="demo-cell-empty"><b>${label}</b><span></span></div>
+              </div>
+              <figcaption><b>${label}</b><span data-i18n="clip_${key}"></span></figcaption>
+            </figure>`;
+    }).join("");
+    host.querySelectorAll(".demo-cell").forEach(mountCell);
   }
 
   function videoBase() {
@@ -182,18 +209,19 @@
   function resolveMedia(key) {
     const raw = cfg.videos && cfg.videos[key];
     const base = videoBase();
+    const poster = `${base}${key}.jpg?v=c4`;
     if (raw && typeof raw === "object") {
       return {
         src: raw.src || "",
         youtube: youtubeId(raw.youtube || raw.src || ""),
-        poster: raw.poster || `${base}${key}.jpg`,
+        poster: raw.poster || poster,
       };
     }
     if (typeof raw === "string") {
       const yt = youtubeId(raw);
-      return { src: yt ? "" : raw, youtube: yt, poster: `${base}${key}.jpg` };
+      return { src: yt ? "" : raw, youtube: yt, poster };
     }
-    return { src: `${base}${key}.mp4`, youtube: "", poster: `${base}${key}.jpg`, auto: true };
+    return { src: `${base}${key}.mp4?v=t1`, youtube: "", poster, auto: true };
   }
 
   function mountCell(cell) {
@@ -223,6 +251,7 @@
       showEmpty();
       return;
     }
+    if (media.poster) video.poster = media.poster;
     video.onerror = showEmpty;
     video.onloadeddata = () => {
       video.hidden = false;

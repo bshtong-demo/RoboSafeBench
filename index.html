@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=demopick">
+  <link rel="stylesheet" href="css/style.css?v=demovid6">
 </head>
 <body>
   <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
@@ -226,12 +226,17 @@
         <div class="section-head">
           <div>
             <h2 data-i18n="demo_title">Demos</h2>
-            <p class="lede" data-i18n="demo_lede">Pick a simulator to see L0–L3.</p>
+            <p class="lede" data-i18n="demo_lede">Pick a simulator. One row is the same task from L0 to L3, with contact on L1–L3. Below: π₀.₅ L1, two obstacles, no contact.</p>
           </div>
         </div>
         <div id="teaser-embed" hidden class="card" style="margin-bottom:14px;aspect-ratio:16/9;padding:0;overflow:hidden"></div>
         <div class="demo-bar" id="demo-bar"></div>
         <div class="demo-rows" id="demo-rows"></div>
+        <div class="demo-safety" id="demo-safety">
+          <h3 data-i18n="safety_title">π₀.₅ · L1 contact-free success</h3>
+          <p class="lede" data-i18n="safety_lede">Three LIBERO Spatial picks — ramekin, stove, cabinet — not the ladder task repeated. Yield+AEGIS was run without video, so these are L1 sudden-drop clips: Oracle stop-wait-resume + AEGIS, no contact.</p>
+          <div class="demo-row-clips demo-safety-clips" id="demo-safety-clips"></div>
+        </div>
       </div>
     </section>
 
@@ -347,8 +352,8 @@ dynisafety sweep --suite smoke</code></pre>
     </div>
   </footer>
 
-  <script src="site.config.js?v=demopick"></script>
-  <script src="js/i18n.js?v=academic"></script>
-  <script src="js/main.js?v=demopick"></script>
+  <script src="site.config.js?v=demovid6"></script>
+  <script src="js/i18n.js?v=demovid6"></script>
+  <script src="js/main.js?v=demovid6"></script>
 </body>
 </html>

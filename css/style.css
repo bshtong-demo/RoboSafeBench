@@ -473,7 +473,7 @@ td.no {
 .demo-cell iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border: 0;
   background: #1b1713;
 }
@@ -485,9 +485,40 @@ td.no {
   text-align: center;
 }
 
+.demo-cell figcaption b {
+  display: block;
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.demo-cell figcaption span {
+  display: block;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
 .demo-cell.is-on .demo-cell-frame {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
+}
+
+.demo-safety {
+  margin-top: 36px;
+}
+
+.demo-safety h3 {
+  margin: 0 0 8px;
+  font-family: var(--serif);
+  font-size: 22px;
+}
+
+.demo-safety .lede {
+  margin: 0 0 14px;
+}
+
+.demo-safety-clips {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 100%;
 }
 
 .seg {
@@ -665,6 +696,7 @@ footer {
   }
   #demo { padding: 32px 0; }
   .demo-row-clips { grid-template-columns: 1fr 1fr; }
+  .demo-safety-clips { grid-template-columns: 1fr; }
   .quad {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
