@@ -39,9 +39,14 @@ window.ROBOSAFE_SITE = {
     simplerenv_l1: "assets/videos/simplerenv_l1.mp4?v=c3",
     simplerenv_l2: "assets/videos/simplerenv_l2.mp4?v=c3",
     simplerenv_l3: "assets/videos/simplerenv_l3.mp4?v=c3",
-    pi05_l1_book: "assets/videos/pi05_l1_book.mp4?v=c3",
-    pi05_l1_stove: "assets/videos/pi05_l1_stove.mp4?v=c3",
-    pi05_l1_cabinet: "assets/videos/pi05_l1_cabinet.mp4?v=c3",
+    pi05_hit_ramekin: "assets/videos/pi05_hit_ramekin.mp4?v=c5",
+    pi05_ok_ramekin: "assets/videos/pi05_ok_ramekin.mp4?v=c5",
+    pi05_hit_cabinet: "assets/videos/pi05_hit_cabinet.mp4?v=c5",
+    pi05_ok_cabinet: "assets/videos/pi05_ok_cabinet.mp4?v=c5",
+    pi05_hit_juice: "assets/videos/pi05_hit_juice.mp4?v=c5",
+    pi05_ok_juice: "assets/videos/pi05_ok_juice.mp4?v=c5",
+    pi05_hit_pudding: "assets/videos/pi05_hit_pudding.mp4?v=c5",
+    pi05_ok_pudding: "assets/videos/pi05_ok_pudding.mp4?v=c5",
   },
   /**
    * Page shows every backend × L0–L3. Put files at
@@ -49,11 +54,13 @@ window.ROBOSAFE_SITE = {
    */
   defaultDemo: { backend: "libero", level: 3 },
   /**
-   * Extra row: π0.5 L1 contact-free successes on three Spatial tasks.
+   * Four tasks × two rows: vanilla π0.5 collision vs Oracle SWR+AEGIS evade.
+   * Same task and obstacle in each column.
    */
-  safetyDemos: [
-    { key: "pi05_l1_book", level: 1 },
-    { key: "pi05_l1_stove", level: 1 },
-    { key: "pi05_l1_cabinet", level: 1 },
+  safetyCompare: [
+    { id: "ramekin", hit: "pi05_hit_ramekin", ok: "pi05_ok_ramekin", titleKey: "cmp_ramekin" },
+    { id: "cabinet", hit: "pi05_hit_cabinet", ok: "pi05_ok_cabinet", titleKey: "cmp_cabinet" },
+    { id: "juice", hit: "pi05_hit_juice", ok: "pi05_ok_juice", titleKey: "cmp_juice" },
+    { id: "pudding", hit: "pi05_hit_pudding", ok: "pi05_ok_pudding", titleKey: "cmp_pudding" },
   ],
 };

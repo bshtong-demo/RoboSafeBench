@@ -171,27 +171,30 @@
   }
 
   function bindSafety() {
-    const host = $("#demo-safety-clips");
+    const host = $("#demo-compare");
     if (!host) return;
-    const clips = Array.isArray(cfg.safetyDemos) ? cfg.safetyDemos : [];
-    if (!clips.length) {
+    const cols = Array.isArray(cfg.safetyCompare) ? cfg.safetyCompare : [];
+    if (!cols.length) {
       const wrap = $("#demo-safety");
       if (wrap) wrap.hidden = true;
       return;
     }
-    host.innerHTML = clips.map((clip) => {
-      const key = clip.key;
-      const level = clip.level != null ? clip.level : "";
-      const label = level === "" ? "" : `L${level}`;
+    function cell(key, kind, labelKey) {
       return `
-            <figure class="demo-cell" data-clip="${key}" data-level="${level}">
+            <figure class="demo-cell is-${kind}" data-clip="${key}" data-kind="${kind}">
               <div class="demo-cell-frame is-empty">
                 <video muted loop playsinline controls preload="metadata" hidden></video>
-                <div class="demo-cell-empty"><b>${label}</b><span></span></div>
+                <div class="demo-cell-empty"><b data-i18n="${labelKey}"></b><span></span></div>
               </div>
-              <figcaption><b>${label}</b><span data-i18n="clip_${key}"></span></figcaption>
+              <figcaption><b data-i18n="${labelKey}"></b></figcaption>
             </figure>`;
-    }).join("");
+    }
+    host.innerHTML = cols.map((col) => `
+      <div class="demo-compare-col">
+        <p class="demo-compare-title" data-i18n="${col.titleKey}"></p>
+        ${cell(col.hit, "hit", "safety_row_hit")}
+        ${cell(col.ok, "ok", "safety_row_ok")}
+      </div>`).join("");
     host.querySelectorAll(".demo-cell").forEach(mountCell);
   }
 
