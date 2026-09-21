@@ -173,29 +173,30 @@
   function bindSafety() {
     const host = $("#demo-compare");
     if (!host) return;
-    const cols = Array.isArray(cfg.safetyCompare) ? cfg.safetyCompare : [];
-    if (!cols.length) {
+    const columns = (cfg.safetyCompare && cfg.safetyCompare.columns) || [];
+    if (!columns.length) {
       const wrap = $("#demo-safety");
       if (wrap) wrap.hidden = true;
       return;
     }
-    function cell(key, kind, labelKey) {
-      return `
-            <figure class="demo-cell is-${kind}" data-clip="${key}" data-kind="${kind}">
-              <div class="demo-cell-frame is-empty">
-                <video muted loop playsinline controls preload="metadata" hidden></video>
-                <div class="demo-cell-empty"><b data-i18n="${labelKey}"></b><span></span></div>
-              </div>
-              <figcaption><b data-i18n="${labelKey}"></b></figcaption>
-            </figure>`;
-    }
-    host.innerHTML = cols.map((col) => `
+    host.innerHTML = columns.map((col) => `
       <div class="demo-compare-col">
-        <p class="demo-compare-title" data-i18n="${col.titleKey}"></p>
-        ${cell(col.hit, "hit", "safety_row_hit")}
-        ${cell(col.ok, "ok", "safety_row_ok")}
+        <p class="demo-compare-task" data-i18n="clip_col_${col.id}"></p>
+        ${safetyCell(col.hit, "hit")}
+        ${safetyCell(col.ok, "ok")}
       </div>`).join("");
     host.querySelectorAll(".demo-cell").forEach(mountCell);
+  }
+
+  function safetyCell(key, kind) {
+    return `
+      <figure class="demo-cell" data-clip="${key}" data-kind="${kind}">
+        <div class="demo-cell-frame is-empty">
+          <span class="demo-kind" data-i18n="safety_kind_${kind}"></span>
+          <video muted loop playsinline controls preload="metadata" hidden></video>
+          <div class="demo-cell-empty"><span></span></div>
+        </div>
+      </figure>`;
   }
 
   function videoBase() {

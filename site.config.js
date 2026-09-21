@@ -54,13 +54,16 @@ window.ROBOSAFE_SITE = {
    */
   defaultDemo: { backend: "libero", level: 3 },
   /**
-   * Four tasks × two rows: vanilla π0.5 collision vs Oracle SWR+AEGIS evade.
-   * Same task and obstacle in each column.
+   * Four columns, two rows. Each column is one LIBERO L1 task and the
+   * same dropped object. Top: vanilla π0.5 collides. Bottom: Oracle
+   * stop-wait-resume + AEGIS, contact-free success.
    */
-  safetyCompare: [
-    { id: "ramekin", hit: "pi05_hit_ramekin", ok: "pi05_ok_ramekin", titleKey: "cmp_ramekin" },
-    { id: "cabinet", hit: "pi05_hit_cabinet", ok: "pi05_ok_cabinet", titleKey: "cmp_cabinet" },
-    { id: "juice", hit: "pi05_hit_juice", ok: "pi05_ok_juice", titleKey: "cmp_juice" },
-    { id: "pudding", hit: "pi05_hit_pudding", ok: "pi05_ok_pudding", titleKey: "cmp_pudding" },
-  ],
+  safetyCompare: {
+    columns: [
+      { id: "ramekin", hit: "pi05_hit_ramekin", ok: "pi05_ok_ramekin" },
+      { id: "cabinet", hit: "pi05_hit_cabinet", ok: "pi05_ok_cabinet" },
+      { id: "juice", hit: "pi05_hit_juice", ok: "pi05_ok_juice" },
+      { id: "pudding", hit: "pi05_hit_pudding", ok: "pi05_ok_pudding" },
+    ],
+  },
 };
