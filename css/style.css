@@ -593,6 +593,29 @@ td.no {
   background: #1b1713;
 }
 
+.result-fig {
+  margin: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 16px 12px;
+  box-shadow: var(--shadow);
+}
+
+.result-fig img {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.result-fig figcaption {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
 #models .pills { margin-bottom: 16px; }
 #models .footnote { margin: 18px 0 8px; }
 
